@@ -23,5 +23,24 @@ int main() {
         tollBooth[i].print();
     }
 
+    int time_interval = 1;
+
+    while (!tollBooth.empty()) {
+        int changes = 0;
+        
+        int chance = rand()%100 + 1;
+        if (chance <= 55) {
+            Car fCar = tollBooth.front();
+            tollBooth.pop_front();
+            changes++;
+        }
+        else if (chance > 55) {
+            tollBooth.push_back(Car());
+            Car nCar = tollBooth.back();
+            changes++;
+        }
+
+        cout << "Time: " << time_interval << "  Operation: "
+    }
     
 }
