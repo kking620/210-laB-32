@@ -25,22 +25,18 @@ int main() {
 
     int time_interval = 1;
 
-    while (!tollBooth.empty()) {
-        int changes = 0;
-        
+    while (!tollBooth.empty()) {    
         int chance = rand()%100 + 1;
         if (chance <= 55) {
-            Car fCar = tollBooth.front();
+            cout << "Time: " << time_interval << "  Operation: Car paid: ";
+            tollBooth[0].print();
             tollBooth.pop_front();
-            changes++;
         }
         else if (chance > 55) {
             tollBooth.push_back(Car());
-            Car nCar = tollBooth.back();
-            changes++;
+            cout << "Time: " << time_interval << "  Operation: Joined lane:  ";
+            tollBooth[tollBooth.size() - 1].print();
         }
-
-        cout << "Time: " << time_interval << "  Operation: "
     }
     
 }
