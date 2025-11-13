@@ -22,4 +22,6 @@ int main() {
     for (int i = 0; i < INITIAL_SIZE; i++) {
         tollBooth[i].print();
     }
+
+    
 }
