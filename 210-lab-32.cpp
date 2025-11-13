@@ -14,5 +14,10 @@ int main() {
     
     deque<Car> tollBooth;
 
+    for (int i = 0; i < INITIAL_SIZE; i++) {
+        tollBooth.push_back(Car());
+    }
+
+    cout << "Initial queue:\n";
     
 }
