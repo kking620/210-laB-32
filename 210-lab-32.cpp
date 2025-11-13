@@ -19,5 +19,7 @@ int main() {
     }
 
     cout << "Initial queue:\n";
-    
+    for (int i = 0; i < INITIAL_SIZE; i++) {
+        tollBooth[i].print();
+    }
 }
