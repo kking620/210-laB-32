@@ -20,6 +20,7 @@ int main() {
 
     cout << "Initial queue:\n";
     for (int i = 0; i < INITIAL_SIZE; i++) {
+        cout << "   ";
         tollBooth[i].print();
     }
 
@@ -41,11 +42,12 @@ int main() {
 
         cout << "Queue:\n";
         for (int i = 0; i < tollBooth.size(); i++) {
+            cout << "   ";
             tollBooth[i].print();
         }
 
         if(tollBooth.empty()) {
-            cout << "Empty";
+            cout << "   Empty";
         }
 
         cout << endl;
