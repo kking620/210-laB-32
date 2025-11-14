@@ -2,7 +2,7 @@
 #include <iomanip>
 #include <deque>
 #include <cstdlib>
-#include <cmath>
+#include <ctime>
 #include "Car.h"
 
 using namespace std;
@@ -23,6 +23,7 @@ int main() {
         tollBooth[i].print();
     }
 
+    cout << endl;
     int time_interval = 1;
 
     while (!tollBooth.empty()) {    
@@ -37,6 +38,19 @@ int main() {
             cout << "Time: " << time_interval << "  Operation: Joined lane:  ";
             tollBooth[tollBooth.size() - 1].print();
         }
+
+        cout << "Queue:\n";
+        for (int i = 0; i < tollBooth.size(); i++) {
+            tollBooth[i].print();
+        }
+
+        if(tollBooth.empty()) {
+            cout << "Empty";
+        }
+
+        cout << endl;
+        time_interval++;
     }
     
+    return 0;
 }
