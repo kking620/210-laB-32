@@ -67,9 +67,18 @@ int main() {
                     tollBoothPlaza[i][tollBoothPlaza[i].size() - 1].print();
                 }
                 else if (chance > 85) {
-                    tollBoothPlaza[i].push_back(Car());
-                    cout << "Lane: " << i + 1 << "  Operation: Joined lane:  ";
-                    tollBoothPlaza[i][tollBoothPlaza[i].size() - 1].print();
+                    cout << "Lane: " << i + 1 << "  Operation: Switched lanes:  ";
+                    int sLane = i;
+                    while(sLane == i) {
+                        sLane = rand() % 4;
+                        if (sLane != i) break;
+                    }
+                    
+                    Car temp = tollBoothPlaza[i].back();
+                    tollBoothPlaza[i].pop_back();
+                    tollBoothPlaza[sLane].push_back(temp);
+
+                    tollBoothPlaza[sLane][tollBoothPlaza[sLane].size() - 1].print();
                 }
             }
         }
@@ -86,6 +95,8 @@ int main() {
                 }
             }
         }
+
+        cout << endl;
     }
     
     return 0;
