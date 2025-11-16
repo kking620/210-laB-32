@@ -18,18 +18,23 @@ int main() {
     srand(time(0));
     
     //declaring the dequeue that will be storing our Car objects
-    array<deque<Car>, 4> tollBoothPlaza;
+    using tollBoothLane = deque<Car>;
+    array<tollBoothLane, 4> tollBoothPlaza;
 
     //initializing the dequeue using the default constructor from the Car.h file until it reaches the size of our INITIAL_SIZE constant
-    for (int i = 0; i < INITIAL_SIZE; i++) {
-        tollBoothPlaza[i].push_back(Car());
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < INITIAL_SIZE; j++) {
+            tollBoothPlaza[i].push_back(Car());
+        }
     }
 
     //for loop that outputs the contents of the initial queue
     cout << "Initial queue:\n";
-    for (int i = 0; i < INITIAL_SIZE; i++) {
+    for (int i = 0; i < 4; i++) {
+        cout << "Lane: " << i + 1 << endl;
         cout << "   ";
-        tollBoothPlaza[i].print();
+        for (int j = 0; j < tollBoothPlaza.size(); j++)
+            tollBoothPlaza[i][j].print();
     }
 
     cout << endl;
