@@ -3,6 +3,7 @@
 #include <iostream>
 #include <iomanip>
 #include <deque>
+#include <array>
 #include <cstdlib>
 #include <ctime>
 #include "Car.h"
@@ -17,18 +18,18 @@ int main() {
     srand(time(0));
     
     //declaring the dequeue that will be storing our Car objects
-    deque<Car> tollBooth;
+    array<deque<Car>, 4> tollBoothPlaza;
 
     //initializing the dequeue using the default constructor from the Car.h file until it reaches the size of our INITIAL_SIZE constant
     for (int i = 0; i < INITIAL_SIZE; i++) {
-        tollBooth.push_back(Car());
+        tollBoothPlaza[i].push_back(Car());
     }
 
     //for loop that outputs the contents of the initial queue
     cout << "Initial queue:\n";
     for (int i = 0; i < INITIAL_SIZE; i++) {
         cout << "   ";
-        tollBooth[i].print();
+        tollBoothPlaza[i].print();
     }
 
     cout << endl;
@@ -37,31 +38,31 @@ int main() {
     int time_interval = 1;
 
     //while loop that continuously loops until the tollBooth dequeue is empty
-    while (!tollBooth.empty()) {    
+    while (!tollBoothPlaza.empty()) {    
         //declaring and initializing the chance variable that will cause a car to either pay and leave the queue or someone will join from the back of the queue
         int chance = rand()%100 + 1;
         //if the chance is found to be less than or equal to 55, then a car will be removed from the front of the tollBooth dequeue
         if (chance <= 55) {
             cout << "Time: " << time_interval << "  Operation: Car paid: ";
-            tollBooth[0].print();
-            tollBooth.pop_front();
+            tollBoothPlaza[0].print();
+            tollBoothPlaza.pop_front();
         }
         //if the chance is found to be greater than 55, then a new car object will be added to the back of the tollBooth dequeue
         else if (chance > 55) {
-            tollBooth.push_back(Car());
+            tollBoothPlaza.push_back(Car());
             cout << "Time: " << time_interval << "  Operation: Joined lane:  ";
-            tollBooth[tollBooth.size() - 1].print();
+            tollBoothPlaza[tollBoothPlaza.size() - 1].print();
         }
 
         //code block that will output all of the Car objects stored in the tollBooth dequeue
         cout << "Queue:\n";
-        for (int i = 0; i < tollBooth.size(); i++) {
+        for (int i = 0; i < tollBoothPlaza.size(); i++) {
             cout << "   ";
-            tollBooth[i].print();
+            tollBoothPlaza[i].print();
         }
         
         //if the tollbooth is found to be empty, then the program will output the following message
-        if(tollBooth.empty()) {
+        if(tollBoothPlaza.empty()) {
             cout << "   Empty";
         }
 
