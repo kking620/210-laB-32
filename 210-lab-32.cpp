@@ -32,60 +32,59 @@ int main() {
     cout << "Initial queue:\n";
     for (int i = 0; i < 4; i++) {
         cout << "Lane: " << i + 1 << endl;
-        cout << "   ";
-        for (int j = 0; j < tollBoothPlaza[i].size(); j++)
+        for (int j = 0; j < tollBoothPlaza[i].size(); j++) {
+            cout << "   ";
             tollBoothPlaza[i][j].print();
+        }
     }
     cout << endl;
 
     //while loop that continuously loops until the tollBooth dequeue is empty
     for (int time = 0; time < 20; time++) {    
+        cout << "Time: " << time + 1 << endl;
         for (int i = 0; i < 4; i++) {
             //declaring and initializing the chance variable that will cause a car to either pay and leave the queue or someone will join from the back of the queue
             int chance = rand()%100 + 1;
             if(tollBoothPlaza[i].empty()) {
                 //if the chance is found to be greater than 55, then a new car object will be added to the back of the tollBooth dequeue
-                if (chance > 50) {
+                if (chance <= 50) {
                     tollBoothPlaza[i].push_back(Car());
-                    cout << "Time: " << time << "  Operation: Joined lane:  ";
+                    cout << "Lane: " << i + 1 << "  Operation: Joined lane:  ";
                     tollBoothPlaza[i][tollBoothPlaza[i].size() - 1].print();
                 }
             }
             else if(!tollBoothPlaza[i].empty()) {
             //if the chance is found to be less than or equal to 55, then a car will be removed from the front of the tollBooth dequeue
                 if (chance <= 46) {
-                    cout << "Time: " << time << "  Operation: Car paid: ";
+                    cout << "Lane: " << i + 1 << "  Operation: Car paid: ";
                     tollBoothPlaza[i][0].print();
                     tollBoothPlaza[i].pop_front();
                 }
                 //if the chance is found to be greater than 55, then a new car object will be added to the back of the tollBooth dequeue
                 else if (chance > 46 && chance <= 85) {
                     tollBoothPlaza[i].push_back(Car());
-                    cout << "Time: " << time << "  Operation: Joined lane:  ";
+                    cout << "Lane: " << i + 1 << "  Operation: Joined lane:  ";
                     tollBoothPlaza[i][tollBoothPlaza[i].size() - 1].print();
                 }
-
                 else if (chance > 85) {
                     tollBoothPlaza[i].push_back(Car());
-                    cout << "Time: " << time << "  Operation: Joined lane:  ";
+                    cout << "Lane: " << i + 1 << "  Operation: Joined lane:  ";
                     tollBoothPlaza[i][tollBoothPlaza[i].size() - 1].print();
                 }
             }
-            //code block that will output all of the Car objects stored in the tollBooth dequeue
-            cout << "Queue:\n";
-            for (int i = 0; i < 4; i++) {
-                cout << "Lane: " << i + 1 << endl;
-                cout << "   ";
-                for (int j = 0; j < tollBoothPlaza[i].size(); j++)
+        }
+        //code block that will output all of the Car objects stored in the tollBooth dequeue
+        for (int i = 0; i < 4; i++) {
+            cout << "Lane " << i + 1 << " Queue: \n";
+            if(tollBoothPlaza[i].empty()) {
+            cout << "   Empty\n";
+            }
+            else {
+                for (int j = 0; j < tollBoothPlaza[i].size(); j++) {
+                    cout << "   ";
                     tollBoothPlaza[i][j].print();
+                }
             }
-            
-            //if the tollbooth is found to be empty, then the program will output the following message
-            if(tollBoothPlaza.empty()) {
-                cout << "   Empty";
-            }
-
-            cout << endl;
         }
     }
     
