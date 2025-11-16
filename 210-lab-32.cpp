@@ -12,6 +12,10 @@ using namespace std;
 
 //declaring and initializing the initial size of the dequeue containing the Car objects
 const int INITIAL_SIZE = 2;
+const int PROB_LEAVE = 46;
+const int PROB_JOIN = 39;
+const int PROB_SWITCH = 15;
+const int PROB_E_SWITCH = 50;
 
 int main() {
     //necessary call function in order to ensure that only random numbers are generated each time the rand() function is called
@@ -50,7 +54,7 @@ int main() {
             //if the toolBoothPlaza is empty, then there is a 50 percent chance that a car will join the line
             if(tollBoothPlaza[i].empty()) {
                 //if the chance is found to be greater than 55, then a new car object will be added to the back of the tollBooth dequeue
-                if (chance <= 50) {
+                if (chance <= PROB_E_SWITCH) {
                     tollBoothPlaza[i].push_back(Car());
                     cout << "Lane: " << i + 1 << "  Operation: Joined lane:  ";
                     tollBoothPlaza[i][tollBoothPlaza[i].size() - 1].print();
@@ -59,19 +63,19 @@ int main() {
             //if the toolBoothPlaza is not empty, then these conditions will be checked
             else if(!tollBoothPlaza[i].empty()) {
             //if the chance is found to be less than or equal to 46, then a car will be removed from the front of the tollBooth dequeue
-                if (chance <= 46) {
+                if (chance <= PROB_LEAVE) {
                     cout << "Lane: " << i + 1 << "  Operation: Car paid: ";
                     tollBoothPlaza[i][0].print();
                     tollBoothPlaza[i].pop_front();
                 }
                 //if the chance is found to be greater than 46 and less than or equal to 85, then a new car object will be added to the back of the tollBooth dequeue
-                else if (chance > 46 && chance <= 85) {
+                else if (chance <= (PROB_LEAVE + PROB_JOIN)) {
                     tollBoothPlaza[i].push_back(Car());
                     cout << "Lane: " << i + 1 << "  Operation: Joined lane:  ";
                     tollBoothPlaza[i][tollBoothPlaza[i].size() - 1].print();
                 }
                 //if the chance is found to be greater than 85, then a new car object will be added to the back of the tollBooth dequeue
-                else if (chance > 85) {
+                else {
                     cout << "Lane: " << i + 1 << "  Operation: Switched lanes:  ";
                     int sLane = i;
                     //while loop that continuously tries to change the lane of the current car object
